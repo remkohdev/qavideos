@@ -1,0 +1,69 @@
+{
+  "name": "Video",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "url": {
+      "type": "string",
+      "required": true
+    },
+    "username": {
+      "type": "string"
+    },
+    "date_published": {
+      "type": "date"
+    },
+    "likes": {
+      "type": "number"
+    },
+    "dislikes": {
+      "type": "number"
+    },
+    "votes": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "videoBelongsToUser": {
+      "type": "belongsTo",
+      "model": "User",
+      "foreignKey": "videotouserid"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

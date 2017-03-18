@@ -6,7 +6,11 @@
     <p>id: {{v.id}}</p>
     <p>url: {{v.url}}</p>
     <p>by: {{v.username}}</p>
-    <p>date published: {{v.date_published}}</p>
+    <p>date: {{v.date_published}}</p>
     <p>votes: {{v.votes}}, likes: {{v.likes}}, dislikes {{v.dislikes}}</p>
+    <div class="actions" ng-show="currentUser">
+      <button ui-sref="edit-video({ id: v.id })">Edit</button>
+      <button a ui-sref="delete-video{ id: v.id })">Delete</button>
+    </div>
   </article>
 </section>
