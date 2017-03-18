@@ -1,53 +1,3 @@
-swagger: '2.0'
-
-info:
-  x-ibm-name: remkohdev-qavideos
-  version: 1.0.0
-  title: remkohdev-qavideos
-
-schemes:
-  - https
-host: $(catalog.host)
-basePath: /api
-
-consumes:
-  - application/json
-produces:
-  - application/json
-
-securityDefinitions:
- clientIdHeader:
-   type: apiKey
-   in: header
-   name: X-IBM-Client-Id
- clientSecretHeader:
-   in: "header"
-   name: "X-IBM-Client-Secret"
-   type: "apiKey"
-
-
-security:
- -
-   clientIdHeader: []
-   clientSecretHeader: []
-
-x-ibm-configuration:
-  testable: true
-  enforced: true
-  cors:
-    enabled: true
-  catalogs:
-    apic-dev:
-      properties:
-        runtime-url: $(TARGET_URL)
-    sb:
-      properties:
-        runtime-url: 'http://localhost:4001'
-  assembly:
-    execute:
-      - invoke:
-          target-url: $(runtime-url)$(request.path)$(request.search)
-
 paths:
   '/Users/{id}/accessTokens/{fk}':
     get:
@@ -1031,8 +981,389 @@ paths:
                 type: number
                 format: double
       deprecated: false
-
-
+  '/Videos/{id}/videoBelongsToUser':
+    get:
+      tags:
+        - Video
+      summary: Fetches belongsTo relation videoBelongsToUser.
+      operationId: Video.prototype.__get__videoBelongsToUser
+      parameters:
+        - name: refresh
+          in: query
+          required: false
+          type: boolean
+        - name: id
+          in: path
+          description: Video id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/User'
+      deprecated: false
+  /Videos:
+    post:
+      tags:
+        - Video
+      summary: Create a new instance of the model and persist it into the data source.
+      operationId: Video.create
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Video'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+    put:
+      tags:
+        - Video
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: Video.upsert__put_Videos
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Video'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+    patch:
+      tags:
+        - Video
+      summary: Patch an existing model instance or insert a new one into the data source.
+      operationId: Video.upsert__patch_Videos
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Video'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+    get:
+      tags:
+        - Video
+      summary: Find all instances of the model matched by filter from the data source.
+      operationId: Video.find
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Video'
+      deprecated: false
+  /Videos/replaceOrCreate:
+    post:
+      tags:
+        - Video
+      summary: Replace an existing model instance or insert a new one into the data source.
+      operationId: Video.replaceOrCreate
+      parameters:
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Video'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+  /Videos/upsertWithWhere:
+    post:
+      tags:
+        - Video
+      summary: Update an existing model instance or insert a new one into the data source based on the where criteria.
+      operationId: Video.upsertWithWhere
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Video'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+  '/Videos/{id}/exists':
+    get:
+      tags:
+        - Video
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Video.exists__get_Videos_{id}_exists'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+  '/Videos/{id}':
+    head:
+      tags:
+        - Video
+      summary: Check whether a model instance exists in the data source.
+      operationId: 'Video.exists__head_Videos_{id}'
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              exists:
+                type: boolean
+      deprecated: false
+    get:
+      tags:
+        - Video
+      summary: 'Find a model instance by {{id}} from the data source.'
+      operationId: Video.findById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: filter
+          in: query
+          description: 'Filter defining fields and include - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+    delete:
+      tags:
+        - Video
+      summary: 'Delete a model instance by {{id}} from the data source.'
+      operationId: Video.deleteById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+      deprecated: false
+    put:
+      tags:
+        - Video
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: 'Video.prototype.updateAttributes__put_Videos_{id}'
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Video'
+        - name: id
+          in: path
+          description: Video id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+    patch:
+      tags:
+        - Video
+      summary: Patch attributes for a model instance and persist it into the data source.
+      operationId: 'Video.prototype.updateAttributes__patch_Videos_{id}'
+      parameters:
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Video'
+        - name: id
+          in: path
+          description: Video id
+          required: true
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+  '/Videos/{id}/replace':
+    post:
+      tags:
+        - Video
+      summary: Replace attributes for a model instance and persist it into the data source.
+      operationId: Video.replaceById
+      parameters:
+        - name: id
+          in: path
+          description: Model id
+          required: true
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: Model instance data
+          required: false
+          schema:
+            description: Model instance data
+            $ref: '#/definitions/Video'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+  /Videos/findOne:
+    get:
+      tags:
+        - Video
+      summary: Find first instance of the model matched by filter from the data source.
+      operationId: Video.findOne
+      parameters:
+        - name: filter
+          in: query
+          description: 'Filter defining fields, where, include, order, offset, and limit - must be a JSON-encoded string ({"something":"value"})'
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            $ref: '#/definitions/Video'
+      deprecated: false
+  /Videos/update:
+    post:
+      tags:
+        - Video
+      summary: 'Update instances of the model matched by {{where}} from the data source.'
+      operationId: Video.updateAll
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+        - name: data
+          in: body
+          description: An object of model property name/value pairs
+          required: false
+          schema:
+            description: An object of model property name/value pairs
+            $ref: '#/definitions/Video'
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            description: Information related to the outcome of the operation
+            type: object
+            properties:
+              count:
+                description: The number of instances updated
+                type: number
+                format: double
+      deprecated: false
+  /Videos/count:
+    get:
+      tags:
+        - Video
+      summary: Count instances of the model matched by where from the data source.
+      operationId: Video.count
+      parameters:
+        - name: where
+          in: query
+          description: Criteria to match model instances
+          required: false
+          type: string
+          format: JSON
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              count:
+                type: number
+                format: double
+      deprecated: false
 definitions:
   x-any:
     properties: {}
@@ -1094,4 +1425,74 @@ definitions:
     required:
       - title
     additionalProperties: false
-
+  Video:
+    properties:
+      title:
+        type: string
+      url:
+        type: string
+      username:
+        type: string
+      date_published:
+        type: string
+        format: date-time
+      likes:
+        type: number
+        format: double
+      dislikes:
+        type: number
+        format: double
+      votes:
+        type: number
+        format: double
+      id:
+        type: number
+        format: double
+      videotouserid:
+        type: number
+        format: double
+    required:
+      - title
+      - url
+    additionalProperties: false
+basePath: /api
+swagger: '2.0'
+info:
+  x-ibm-name: remkohdev-qavideos
+  version: 1.0.0
+  title: remkohdev-qavideos
+schemes:
+  - https
+host: $(catalog.host)
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientIdHeader:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+  clientSecretHeader:
+    in: header
+    name: X-IBM-Client-Secret
+    type: apiKey
+security:
+  - clientIdHeader: []
+    clientSecretHeader: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+    sb:
+      properties:
+        runtime-url: 'http://localhost:4001'
+  assembly:
+    execute:
+      - invoke:
+          target-url: $(runtime-url)$(request.path)$(request.search)

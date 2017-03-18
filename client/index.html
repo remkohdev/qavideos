@@ -7,18 +7,27 @@
     <h1>My Videos</h1>
 
 	<nav>
-	    <ul>
-	        <li ng-hide="currentUser">
-	            <a ui-sref="sign-up" ui-sref-active="active">Sign up</a>
-	        </li>
-	        <li ng-hide="currentUser">
-	            <a ui-sref="login" ui-sref-active="active">Log in</a>
-	        </li>
-	        <li ng-show="currentUser">
-	            <a ui-sref="logout" ui-sref-active="active">Log out</a>
-	        </li>
-	    </ul>
-	</nav>
+    <ul>
+      <li ng-hide="currentUser">
+        <a ui-sref="sign-up" ui-sref-active="active">Sign up</a>
+      </li>
+      <li ng-hide="currentUser">
+        <a ui-sref="login" ui-sref-active="active">Log in</a>
+      </li>
+      <li ng-show="currentUser">
+        <a ui-sref="logout" ui-sref-active="active">Log out</a>
+      </li>
+      <li>
+        <a ui-sref="all-videos" ui-sref-active="active">All Videos</a>
+      </li>
+      <li ng-show="currentUser">
+        <a ui-sref="my-videos" ui-sref-active="active">My Videos</a>
+      </li>
+      <li ng-show="currentUser">
+        <a ui-sref="add-video" ui-sref-active="active">Add Video</a>
+      </li>
+    </ul>
+</nav>
 	<main ui-view></main>
 	
 
@@ -29,6 +38,7 @@
     <script src="js/app.js"></script>
     <script src="js/controllers/auth.js"></script>
     <script src="js/services/authFactory.js"></script>
+    <script src="js/controllers/video.js"></script>
     
 </body>
 </html>

@@ -26,16 +26,45 @@ angular.module('app', [
       controller: 'AuthLoginController'
     })
 
-    .state('all-videos', {
-      url: '/all-videos',
-      templateUrl: 'views/all-videos.html'
-    })
-
     .state('logout', {
       url: '/logout',
       templateUrl: 'views/all-videos.html',
       controller: 'AuthLogoutController'
-    })   
+    }) 
+
+    .state('all-videos', {
+      url: '/all-videos',
+      templateUrl: 'views/all-videos.html',
+      controller: 'AllVideosController',
+      authenticate: true
+    })
+
+    .state('my-videos', {
+      url: '/my-videos',
+      templateUrl: 'views/my-videos.html',
+      controller: 'MyVideosController',
+      authenticate: true
+    })
+
+    .state('add-video', {
+      url: '/add-video',
+      templateUrl: 'views/video-form.html',
+      controller: 'AddVideoController',
+      authenticate: true
+    })
+
+    .state('edit-video', {
+      url: '/edit-video/:id',
+      templateUrl: 'views/video-form.html',
+      controller: 'EditVideoController',
+      authenticate: true
+    })
+    
+    .state('delete-video', {
+      url: '/delete-video/:id',
+      controller: 'DeleteVideoController',
+      authenticate: true
+    }) 
     
   }
 ]);

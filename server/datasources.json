@@ -2,5 +2,15 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "postgresdb": {
+    "host": "echo.db.elephantsql.com",
+    "port": 5432,
+    "url": "postgres://pbgnelty:YK29dXLzaWD56EIPUcw22pptzB2RnkbM@echo.db.elephantsql.com:5432/pbgnelty",
+    "database": "pbgnelty",
+    "password": "YK29dXLzaWD56EIPUcw22pptzB2RnkbM",
+    "name": "postgresdb",
+    "user": "pbgnelty",
+    "connector": "postgresql"
   }
 }
