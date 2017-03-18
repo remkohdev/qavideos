@@ -4,13 +4,13 @@
     "connector": "memory"
   },
   "postgresdb": {
-    "host": "echo.db.elephantsql.com",
-    "port": 5432,
-    "url": "postgres://pbgnelty:YK29dXLzaWD56EIPUcw22pptzB2RnkbM@echo.db.elephantsql.com:5432/pbgnelty",
-    "database": "pbgnelty",
-    "password": "YK29dXLzaWD56EIPUcw22pptzB2RnkbM",
+    "host": "host",
+    "port": port,
+    "url": "postgres://username:password@host:port/db",
+    "database": "db",
+    "password": "password",
     "name": "postgresdb",
-    "user": "pbgnelty",
+    "user": "username",
     "connector": "postgresql"
   }
 }
